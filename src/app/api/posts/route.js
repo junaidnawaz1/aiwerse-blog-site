@@ -1,6 +1,15 @@
+
 // import { NextResponse } from 'next/server'
 // import { Post } from '@/models/postModel'
 // import { connectToDatabase } from '@/lib/db'
+
+// // helper function to create slug
+// function createSlug(title) {
+//   return title
+//     .toLowerCase()
+//     .replace(/[^a-z0-9]+/g, '-')   // replace spaces/special chars with -
+//     .replace(/^-+|-+$/g, '')       // trim - from start/end
+// }
 
 // // GET: return all posts, with optional category & search
 // export async function GET(request) {
@@ -18,7 +27,7 @@
 //     }
 
 //     if (keyword) {
-//       query.title = { $regex: keyword, $options: 'i' } // case-insensitive search
+//       query.title = { $regex: keyword, $options: 'i' }
 //     }
 
 //     const posts = await Post.find(query).sort({ createdAt: -1 }).limit(keyword ? 5 : 0)
@@ -48,8 +57,11 @@
 //       )
 //     }
 
+//     const slug = createSlug(title)   // ✅ generate slug
+
 //     const post = new Post({
 //       title,
+//       slug,                          // ✅ include slug
 //       content,
 //       category,
 //       imageUrl: imageUrl || undefined,
@@ -78,13 +90,17 @@
 //     await connectToDatabase()
 //     const body = await request.json()
 
-//     const { id, ...updateData } = body
+//     const { id, title, ...updateData } = body
 
 //     if (!id) {
 //       return NextResponse.json(
 //         { success: false, error: 'Post ID is required' },
 //         { status: 400 }
 //       )
+//     }
+
+//     if (title) {
+//       updateData.slug = createSlug(title)
 //     }
 
 //     const updatedPost = await Post.findByIdAndUpdate(id, updateData, { new: true })
@@ -145,6 +161,7 @@
 // }
 
 import { NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'  // ← ADD THIS LINE
 import { Post } from '@/models/postModel'
 import { connectToDatabase } from '@/lib/db'
 
@@ -152,11 +169,11 @@ import { connectToDatabase } from '@/lib/db'
 function createSlug(title) {
   return title
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')   // replace spaces/special chars with -
-    .replace(/^-+|-+$/g, '')       // trim - from start/end
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
 }
 
-// GET: return all posts, with optional category & search
+// GET: return all posts
 export async function GET(request) {
   try {
     await connectToDatabase()
@@ -202,11 +219,11 @@ export async function POST(request) {
       )
     }
 
-    const slug = createSlug(title)   // ✅ generate slug
+    const slug = createSlug(title)
 
     const post = new Post({
       title,
-      slug,                          // ✅ include slug
+      slug,
       content,
       category,
       imageUrl: imageUrl || undefined,
@@ -215,6 +232,14 @@ export async function POST(request) {
     })
 
     const newPost = await post.save()
+
+    // ← ADD THIS: Clear cache for all affected pages
+    revalidatePath('/')                          // home page
+    revalidatePath('/ai-tools')                  // ai-tools page
+    revalidatePath('/ai/guides')                 // guides page
+    revalidatePath('/ai/comparisions')           // comparisons page
+    revalidatePath('/ai/business-use-cases')     // business page
+    revalidatePath('/ai/news')                   // news page
 
     return NextResponse.json(
       { success: true, data: newPost, message: 'Post created successfully' },
@@ -235,7 +260,7 @@ export async function PUT(request) {
     await connectToDatabase()
     const body = await request.json()
 
-    const { id, title, ...updateData } = body
+    const { id, title, category, ...updateData } = body
 
     if (!id) {
       return NextResponse.json(
@@ -248,7 +273,7 @@ export async function PUT(request) {
       updateData.slug = createSlug(title)
     }
 
-    const updatedPost = await Post.findByIdAndUpdate(id, updateData, { new: true })
+    const updatedPost = await Post.findByIdAndUpdate(id, { title, category, ...updateData }, { new: true })
 
     if (!updatedPost) {
       return NextResponse.json(
@@ -256,6 +281,14 @@ export async function PUT(request) {
         { status: 404 }
       )
     }
+
+    // ← ADD THIS: Clear cache for all affected pages
+    revalidatePath('/')
+    revalidatePath('/ai-tools')
+    revalidatePath('/ai/guides')
+    revalidatePath('/ai/comparisions')
+    revalidatePath('/ai/business-use-cases')
+    revalidatePath('/ai/news')
 
     return NextResponse.json(
       { success: true, data: updatedPost, message: 'Post updated successfully' }
@@ -292,6 +325,14 @@ export async function DELETE(request) {
         { status: 404 }
       )
     }
+
+    // ← ADD THIS: Clear cache for all affected pages
+    revalidatePath('/')
+    revalidatePath('/ai-tools')
+    revalidatePath('/ai/guides')
+    revalidatePath('/ai/comparisions')
+    revalidatePath('/ai/business-use-cases')
+    revalidatePath('/ai/news')
 
     return NextResponse.json(
       { success: true, message: 'Post deleted successfully' }
