@@ -1,0 +1,62 @@
+/* Override table styles for user-facing blog pages */
+article table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  margin: 2rem 0 !important;
+  background-color: #779EC7 !important;
+  color: #ffffff !important;
+  border-radius: 20px !important;
+  overflow: hidden !important;
+}
+
+article thead {
+  background: linear-gradient(90deg, #1e40af, #1e3a8a) !important;
+}
+
+article thead th {
+  color: #ffffff !important;
+  background: linear-gradient(90deg, #1e40af, #1e3a8a) !important;
+  font-weight: 700 !important;
+  padding: 1rem !important;
+  text-align: left !important;
+  border: 1px solid #334155 !important;
+  border-radius: 20px !important
+}
+
+article thead th:first-child {
+  border-radius: 12px 0 0 0 !important;
+}
+
+/* Top-right corner */
+article thead th:last-child {
+  border-radius: 0 12px 0 0 !important;
+}
+
+
+/* #afadaf9 */
+article tbody th,
+article tbody td {
+  color: #ffffff !important;
+  background-color: #779EC7 !important;
+  border: 1px solid #334155 !important;
+  padding: 1rem !important;
+  text-align: left !important;
+}
+
+article tbody tr:nth-child(even) th,
+article tbody tr:nth-child(even) td {
+  background-color: #779EC7 !important;
+  color: #ffffff !important;
+}
+
+article tbody tr:hover th,
+article tbody tr:hover td {
+  background-color: #779EC7 !important;
+  color: #ffffff !important;
+}
+
+/* Force override inline styles on all table cells */
+article table td[style],
+article table th[style] {
+  color: #ffffff !important;
+}
