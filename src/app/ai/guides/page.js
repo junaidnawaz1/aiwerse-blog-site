@@ -4,9 +4,34 @@ import { connectToDatabase } from '@/lib/db'
 import { Post } from '@/models/postModel'
 
 
-export const metadata = {
-  title: 'AI Guides - AIwerse',
-  description: 'Comprehensive guides on AI, machine learning, and artificial intelligence.',
+export async function generateMetadata() {
+  return {
+    title: 'AI Guides & Tutorials for Beginners and Professionals | AIwerse',
+    description: 'Explore comprehensive AI guides, tutorials, and step-by-step resources on artificial intelligence, machine learning, automation, and productivity tools.',
+    alternates: {
+      canonical: 'https://www.aiwerse.blog/ai/guides',
+    },
+    openGraph: {
+      title: 'AI Guides & Tutorials for Beginners and Professionals | AIwerse',
+      description: 'Explore comprehensive AI guides, tutorials, and step-by-step resources on artificial intelligence, machine learning, automation, and productivity tools.',
+      url: 'https://www.aiwerse.blog/ai/guides',
+      type: 'website',
+      images: [
+        {
+          url: 'https://res.cloudinary.com/docdcivv7/image/upload/v1/newsee_blog/og-default',
+          width: 1200,
+          height: 630,
+          alt: 'AI Guides - AIwerse',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'AI Guides & Tutorials for Beginners and Professionals | AIwerse',
+      description: 'Explore comprehensive AI guides, tutorials, and step-by-step resources on artificial intelligence, machine learning, automation, and productivity tools.',
+      images: ['https://res.cloudinary.com/docdcivv7/image/upload/v1/newsee_blog/og-default'],
+    },
+  }
 }
 
 async function fetchAIGuidesPosts() {
@@ -32,10 +57,10 @@ export default async function AIGuidesPage() {
 
         <div className="mb-12">
           <h1 className="text-6xl font-bold text-gray-900 mb-4">
-            AI Guides
+            AI Guides & Tutorials
           </h1>
           <p className="text-lg text-gray-600">
-            Comprehensive guides on AI, machine learning, and artificial intelligence to help you master the fundamentals.
+            Explore comprehensive AI guides, tutorials, and step-by-step resources on artificial intelligence, machine learning, automation, and productivity tools.
           </p>
         </div>
 

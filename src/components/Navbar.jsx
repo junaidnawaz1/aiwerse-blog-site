@@ -5,7 +5,8 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FiMenu, FiX, FiArrowRight } from 'react-icons/fi'
-import MagneticButton from './ui/MagneticButton'  
+import Image from 'next/image'
+import MagneticButton from './ui/MagneticButton'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -114,12 +115,22 @@ export default function Navbar() {
                 href="/" 
                 className="block group"
               >
-                <span 
-                  style={{ fontFamily: '"Syne", sans-serif' }} 
-                  className={`text-xl md:text-2xl font-black tracking-wider uppercase bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent transition-all duration-300 group-hover:to-blue-300 ${scrolled ? 'md:text-xl' : ''}`}
-                >
-                  AIWerse
-                </span>
+                <div className="flex flex-col items-center gap-1">
+                 
+                  <motion.div
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  >
+                    <Image
+                      src="/logo3.png"
+                      alt="AIwerse"
+                      width={scrolled ? 50 : 60}
+                      height={scrolled ? 50 : 60}
+                      className="transition-all duration-300"
+                    />
+                  </motion.div>
+                </div>
               </Link>
             </motion.div>
 

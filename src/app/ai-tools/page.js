@@ -4,9 +4,34 @@ import { connectToDatabase } from '@/lib/db'
 import { Post } from '@/models/postModel'
 
 
-export const metadata = {
-  title: 'AI Tools - AIwerse',
-  description: 'Explore the latest AI tools, innovations, and insights.',
+export async function generateMetadata() {
+  return {
+    title: 'Best AI Tools for Productivity & Business | AIwerse',
+    description: 'Discover the latest AI tools for business, productivity, design, marketing, coding, and automation with expert insights from AIwerse.',
+    alternates: {
+      canonical: 'https://www.aiwerse.blog/ai-tools',
+    },
+    openGraph: {
+      title: 'Best AI Tools for Productivity & Business | AIwerse',
+      description: 'Discover the latest AI tools for business, productivity, design, marketing, coding, and automation with expert insights from AIwerse.',
+      url: 'https://www.aiwerse.blog/ai-tools',
+      type: 'website',
+      images: [
+        {
+          url: 'https://res.cloudinary.com/docdcivv7/image/upload/v1/newsee_blog/og-default',
+          width: 1200,
+          height: 630,
+          alt: 'AI Tools - AIwerse',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Best AI Tools for Productivity & Business | AIwerse',
+      description: 'Discover the latest AI tools for business, productivity, design, marketing, coding, and automation with expert insights from AIwerse.',
+      images: ['https://res.cloudinary.com/docdcivv7/image/upload/v1/newsee_blog/og-default'],
+    },
+  }
 }
 
 async function fetchAIToolsPosts() {
@@ -32,10 +57,10 @@ export default async function AIToolsPage() {
 
         <div className="mb-12">
           <h1 className="text-6xl font-bold text-gray-900 mb-4">
-            AI Tools
+            AI Tools for Business & Productivity
           </h1>
           <p className="text-lg text-gray-600">
-            Discover the latest AI tools, innovations, and insights shaping the future of technology.
+            Discover the latest AI tools for business, productivity, design, marketing, coding, and automation with expert insights from AIwerse.
           </p>
         </div>
 

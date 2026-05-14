@@ -1,6 +1,8 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
+import { motion } from 'framer-motion'
 import { 
   FaTwitter, 
   FaLinkedin, 
@@ -62,12 +64,20 @@ export default function Footer() {
           {/* Brand Section */}
           <div className="space-y-4">
             <Link href="/" className="inline-block group">
-              <span 
-                style={{ fontFamily: '"Syne", sans-serif' }} 
-                className="text-3xl font-black tracking-wider uppercase bg-gradient-to-r from-white to-blue-400 bg-clip-text text-transparent"
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
               >
-                AIwerse
-              </span>
+                
+                <Image
+                  src="/logo3.png"
+                  alt="AIwerse"
+                  width={80}
+                  height={80}
+                  className="transition-all duration-300"
+                />
+              </motion.div>
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed">
               Your ultimate destination for AI tools, guides, comparisons, business insights, and latest news.

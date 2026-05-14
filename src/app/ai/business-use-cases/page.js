@@ -4,9 +4,34 @@ import { connectToDatabase } from '@/lib/db'
 import { Post } from '@/models/postModel'
 
 
-export const metadata = {
-  title: 'Business Use Cases - AIwerse',
-  description: 'Explore real-world business use cases and applications of artificial intelligence.',
+export async function generateMetadata() {
+  return {
+    title: 'AI Business Use Cases & Real-World Applications | AIwerse',
+    description: 'Discover how businesses use artificial intelligence for marketing, automation, customer support, productivity, analytics, and growth.',
+    alternates: {
+      canonical: 'https://www.aiwerse.blog/ai/business-use-cases',
+    },
+    openGraph: {
+      title: 'AI Business Use Cases & Real-World Applications | AIwerse',
+      description: 'Discover how businesses use artificial intelligence for marketing, automation, customer support, productivity, analytics, and growth.',
+      url: 'https://www.aiwerse.blog/ai/business-use-cases',
+      type: 'website',
+      images: [
+        {
+          url: 'https://res.cloudinary.com/docdcivv7/image/upload/v1/newsee_blog/og-default',
+          width: 1200,
+          height: 630,
+          alt: 'Business Use Cases - AIwerse',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'AI Business Use Cases & Real-World Applications | AIwerse',
+      description: 'Discover how businesses use artificial intelligence for marketing, automation, customer support, productivity, analytics, and growth.',
+      images: ['https://res.cloudinary.com/docdcivv7/image/upload/v1/newsee_blog/og-default'],
+    },
+  }
 }
 
 async function fetchBusinessUseCasesPosts() {
@@ -32,10 +57,10 @@ export default async function BusinessUseCasesPage() {
 
         <div className="mb-12">
           <h1 className="text-6xl font-bold text-gray-900 mb-4">
-            Business Use Cases
+            AI Business Use Cases & Real-World Applications
           </h1>
           <p className="text-lg text-gray-600">
-            Explore real-world business use cases and applications of artificial intelligence transforming industries.
+            Discover how businesses use artificial intelligence for marketing, automation, customer support, productivity, analytics, and growth.
           </p>
         </div>
 

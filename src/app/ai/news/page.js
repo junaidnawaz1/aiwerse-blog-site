@@ -4,9 +4,34 @@ import { connectToDatabase } from '@/lib/db'
 import { Post } from '@/models/postModel'
 
 
-export const metadata = {
-  title: 'AI News - AIwerse',
-  description: 'Stay updated with the latest artificial intelligence news, breakthroughs, and industry updates.',
+export async function generateMetadata() {
+  return {
+    title: 'Latest AI News, Trends & Industry Updates | AIwerse',
+    description: 'Stay updated with the latest AI news, breakthroughs, technology trends, OpenAI updates, AI startups, and industry developments worldwide.',
+    alternates: {
+      canonical: 'https://www.aiwerse.blog/ai/news',
+    },
+    openGraph: {
+      title: 'Latest AI News, Trends & Industry Updates | AIwerse',
+      description: 'Stay updated with the latest AI news, breakthroughs, technology trends, OpenAI updates, AI startups, and industry developments worldwide.',
+      url: 'https://www.aiwerse.blog/ai/news',
+      type: 'website',
+      images: [
+        {
+          url: 'https://res.cloudinary.com/docdcivv7/image/upload/v1/newsee_blog/og-default',
+          width: 1200,
+          height: 630,
+          alt: 'Latest AI News, Trends & Industry Updates | AIwerse',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Latest AI News, Trends & Industry Updates | AIwerse',
+      description: 'Stay updated with the latest AI news, breakthroughs, technology trends, OpenAI updates, AI startups, and industry developments worldwide.',
+      images: ['https://res.cloudinary.com/docdcivv7/image/upload/v1/newsee_blog/og-default'],
+    },
+  }
 }
 
 async function fetchAINewsPosts() {

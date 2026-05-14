@@ -4,9 +4,34 @@ import { connectToDatabase } from '@/lib/db'
 import { Post } from '@/models/postModel'
 
 
-export const metadata = {
-  title: 'AI Comparisons - AIwerse',
-  description: 'Compare different AI tools, platforms, and technologies to make informed decisions.',
+export async function generateMetadata() {
+  return {
+    title: 'AI Tool Comparisons & Reviews | Compare the Best AI Platforms | AIwerse',
+    description: 'Compare AI tools, platforms, chatbots, generators, and automation software to find the best AI solution for your business and workflow.',
+    alternates: {
+      canonical: 'https://www.aiwerse.blog/ai/comparisions',
+    },
+    openGraph: {
+      title: 'AI Tool Comparisons & Reviews | Compare the Best AI Platforms | AIwerse',
+      description: 'Compare AI tools, platforms, chatbots, generators, and automation software to find the best AI solution for your business and workflow.',
+      url: 'https://www.aiwerse.blog/ai/comparisions',
+      type: 'website',
+      images: [
+        {
+          url: 'https://res.cloudinary.com/docdcivv7/image/upload/v1/newsee_blog/og-default',
+          width: 1200,
+          height: 630,
+          alt: 'AI Comparisons - AIwerse',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'AI Tool Comparisons & Reviews | Compare the Best AI Platforms | AIwerse',
+      description: 'Compare AI tools, platforms, chatbots, generators, and automation software to find the best AI solution for your business and workflow.',
+      images: ['https://res.cloudinary.com/docdcivv7/image/upload/v1/newsee_blog/og-default'],
+    },
+  }
 }
 
 async function fetchAIComparisonsPosts() {
@@ -32,10 +57,10 @@ export default async function AIComparisonsPage() {
 
         <div className="mb-12">
           <h1 className="text-6xl font-bold text-gray-900 mb-4">
-            AI Comparisons
+            AI Tool Comparisons & Reviews
           </h1>
           <p className="text-lg text-gray-600">
-            Compare different AI tools, platforms, and technologies to make informed decisions for your needs.
+            Compare AI tools, platforms, chatbots, generators, and automation software to find the best AI solution for your business and workflow.
           </p>
         </div>
 

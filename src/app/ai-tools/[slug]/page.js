@@ -39,6 +39,33 @@ export async function generateMetadata({ params }) {
   return {
     title: post.seoTitle || post.title,
     description: post.seoDescription || post.title,
+    alternates: {
+      canonical: `https://www.aiwerse.blog/ai-tools/${post.slug}`,
+    },
+    openGraph: {
+      title: post.seoTitle || post.title,
+      description: post.seoDescription || post.title,
+      url: `https://www.aiwerse.blog/ai-tools/${post.slug}`,
+      type: 'article',
+      images: post.imageUrl ? [{
+        url: post.imageUrl,
+        width: 1200,
+        height: 630,
+        alt: post.title,
+      }] : [{
+        url: 'https://res.cloudinary.com/docdcivv7/image/upload/v1/newsee_blog/og-default',
+        width: 1200,
+        height: 630,
+        alt: 'AIwerse - Latest AI Tools, News & Insights',
+      }],
+      publishedTime: post.createdAt,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.seoTitle || post.title,
+      description: post.seoDescription || post.title,
+      images: post.imageUrl ? [post.imageUrl] : ['https://res.cloudinary.com/docdcivv7/image/upload/v1/newsee_blog/og-default'],
+    },
   }
 }
 
